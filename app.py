@@ -26,11 +26,12 @@ def train(number=None):
     if STATIC:
         with open('examples/24181.json', 'r') as samplefile:
             stops = json.load(samplefile)
-        dataisfrom = "API"
+        dataisfrom = "Static"
+
     else:
         timetable_response = requests.get(timetable_api + number)
         stops = timetable_response.json()
-        dataisfrom = "Static"
+        dataisfrom = "API"
 
     #Making static files available
     bs_css = url_for('static', filename='css/bootstrap.min.css')
