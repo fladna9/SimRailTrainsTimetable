@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{bootstrap-css}}">
-    <script src="{{bootstrap-js}}"></script>
+    <link rel="stylesheet" href="{{bootstrapcss}}">
+    <script src="{{bootstrapjs}}"></script>
 </head>
 <body>
+<h3>Simrail Timetable - for simulator use only</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"><h4>Train Type</h4><p>{{ stops[0].train_type }}</p></div>
+        <div class="col-md-2"><h4>Train Number</h4><p>{{ stops[0].train_number }}</p></div>
+        <div class="col-md-2"><h4>Train Origin</h4><p>{{ stops[0].station }}</p></div>
+        <div class="col-md-2"><h4>Train Destination</h4><p>{{ stops[-1].station }}</p></div>
+        <div class="col-md-2"><h4>Data from</h4><p> {{ datafrom }}</p></div>
+        <div class="col-md-2"><h4>Data updated</h4><p>{{ stops[-1].cachedate }}</p></div>
+    </div>
+</div>
+<tbody>
+  {% for stop in stops %}
+    <tr>
+      <td>{{stop}}</td>
+      <td>{{stops['{{stop}}']}}</td>
+    </tr>
+  {% endfor %}
+</tbody>
 </body>
 </html>
