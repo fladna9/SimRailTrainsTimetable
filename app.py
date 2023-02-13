@@ -1,6 +1,8 @@
 from flask import Flask, url_for, render_template
 import requests
 import json
+import traceback
+import uuid
 
 STATIC=True
 
@@ -24,9 +26,17 @@ def train(number=None):
 
     #Getting static or API
     if STATIC:
-        with open('examples/24181.json', 'r') as samplefile:
-            stops = json.load(samplefile)
-        dataisfrom = "Static"
+        try:
+            with open('examples/24181.json', 'r') as samplefile:
+                stops = json.load(samplefile)
+            dataisfrom = "Static"
+        except:
+            bs_css = url_for('static', filename='css/bootstrap.min.css')
+            bs_js = url_for('static', filename='js/bootstrap.min.js')
+            uuiderr = uuid.uuid4()
+            print("Exception: " + str(uuiderr))
+            traceback.print_exc()
+            return render_template('error.html', uuid=uuiderr, bootstrapcss=bs_css, bootstrapjs=bs_js)
 
     else:
         timetable_response = requests.get(timetable_api + number)
