@@ -6,7 +6,7 @@ from __main__ import app
 
 import requests
 from flask import url_for, render_template
-from app import STATIC, timetable_api
+from app import STATIC, timetable_api, ErrorCatcher
 
 
 @app.route('/train/')
@@ -17,8 +17,6 @@ def train(number=None):
 
     #Setting a default train if none selected
     if not number or not str.isnumeric(number):
-        print("Not a number: " + str(not number))
-        print("Is Numeric: " + str(str.isdigit(str(number))))
         return render_template('error-notrainnumber.html', bootstrapcss=bs_css, bootstrapjs=bs_js)
 
     #Getting static or API
@@ -29,10 +27,7 @@ def train(number=None):
                 stops = json.load(samplefile)
             dataisfrom = "Static"
         except:
-            uuiderr = uuid.uuid4()
-            print("Exception: " + str(uuiderr))
-            traceback.print_exc()
-            return render_template('error.html', uuid=uuiderr, bootstrapcss=bs_css, bootstrapjs=bs_js)
+            return ErrorCatcher()
 
     else:
         try:
@@ -40,10 +35,7 @@ def train(number=None):
             stops = timetable_response.json()
             dataisfrom = "API"
         except:
-            uuiderr = uuid.uuid4()
-            print("Exception: " + str(uuiderr))
-            traceback.print_exc()
-            return render_template('error.html', uuid=uuiderr, bootstrapcss=bs_css, bootstrapjs=bs_js)
+            return ErrorCatcher()
 
     for stop in stops:
         if stop['stop_type'] and stop['scheduled_arrival_hour']:

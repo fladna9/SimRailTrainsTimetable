@@ -7,15 +7,14 @@
     <script src="{{bootstrapjs}}"></script>
 </head>
 <body>
-<h3>Simrail Timetable - for simulator use only</h3>
 <div class="container" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;">
     <div class="row">
-        <div class="col-md-2"><h4>Train Type</h4><p>{{ stops[0].train_type }}</p></div>
-        <div class="col-md-2"><h4>Train Number</h4><p>{{ stops[0].train_number }}</p></div>
-        <div class="col-md-2"><h4>Train Origin</h4><p>{{ stops[0].station }}</p></div>
-        <div class="col-md-2"><h4>Train Destination</h4><p>{{ stops[-1].station }}</p></div>
-        <div class="col-md-2"><h4>Data from</h4><p> {{ datafrom }}</p></div>
-        <div class="col-md-2"><h4>Data updated</h4><p>{{ stops[-1].cachedate }}</p></div>
+        <div class="col-md-2" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;"><h4>Train Type</h4><p>{{ stops[0].train_type }}</p></div>
+        <div class="col-md-2" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;"><h4>Train Number</h4><p>{{ stops[0].train_number }}</p></div>
+        <div class="col-md-2" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;"><h4>Train Origin</h4><p>{{ stops[0].station }}</p></div>
+        <div class="col-md-2" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;"><h4>Train Destination</h4><p>{{ stops[-1].station }}</p></div>
+        <div class="col-md-2" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;"><h4>Data from</h4><p> {{ datafrom }}</p></div>
+        <div class="col-md-2" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;"><h4>Data updated</h4><p>{{ stops[-1].cachedate }}</p></div>
     </div>
 </div>
 <div class="container">
@@ -25,7 +24,8 @@
             <tr>
                 <th scope="col">Line</th>
                 <th scope="col">Station</th>
-                <th scope="col">Time</th>
+                <th scope="col">Arrival Time</th>
+                <th scope="col">Departure Time</th>
             </tr>
             </thead>
             <tbody>
@@ -34,10 +34,22 @@
                     <td>{{ stop.line }}</td>
                     {% if stop.stop_type %}
                         <td><b>{{ stop.station }} - {{ stop.stop_type }}</b></td>
-                        <td><b>{{ stop.scheduled_arrival_hour }}<br>{{ stop.departure_time }}</b></td>
+                        {% if stop.scheduled_arrival_hour %}
+                            <td><b>{{ stop.scheduled_arrival_hour }}</b></td>
+                            <td><b>{{ stop.departure_time }}</b></td>
+                        {% else %}
+                            <td></td>
+                            <td></td>
+                        {% endif %}
                     {% else %}
                         <td>{{ stop.station }}</td>
-                        <td>{{ stop.scheduled_arrival_hour }}</td>
+                        {% if stop.scheduled_arrival_hour %}
+                            <td>{{ stop.scheduled_arrival_hour }}</td>
+                            <td></td>
+                        {% else %}
+                            <td></td>
+                            <td></td>
+                        {% endif %}
                     {% endif %}
                 </tr>
             {% endfor %}
@@ -45,5 +57,6 @@
         </table>
     </div>
 </div>
+<p style="text-align: center">Simrail Timetable - for simulator use only</p>
 </body>
 </html>

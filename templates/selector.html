@@ -7,11 +7,19 @@
     <script src="{{bootstrapjs}}"></script>
 </head>
 <body>
-<h3>Simrail Timetable - for simulator use only</h3>
 <div class="container">
+    <h3>Welcome to Simrail Timetable Viewer</h3>
     <h4>Please submit your train number:</h4>
+    <select>
+        <option>FR1</option>
+    </select>
     <input type="number" id="trainnumber" name="trainnumber">
     <input type="submit" name="submit" onClick="redirectToTrain()">
+    <div>
+        <p>To view a timetable, please select a server and insert a valid train number in the field and submit.</p>
+        <p>This application is licensed under Apache 2.0 license, you can view source code and fork on <a>GitHub</a>.</p>
+        <p>Thanks to Simrail developers, DKFN, XXX, Cemo and the SimrailFR community.</p>
+    </div>
 </div>
 <script>
     function redirectToTrain() {
@@ -20,5 +28,6 @@
         document.location = "/train/" + trainNumber;
     }
 </script>
+<p style="text-align: center">Simrail Timetable - for simulator use only</p>
 </body>
 </html>
