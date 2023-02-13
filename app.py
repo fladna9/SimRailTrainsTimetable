@@ -4,7 +4,7 @@ import json
 import traceback
 import uuid
 
-STATIC=True
+STATIC=False
 
 app = Flask(__name__)
 timetable_api = "https://sr-dispatch-api-staging-uld3cp3nxa-od.a.run.app/train/"

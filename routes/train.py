@@ -19,7 +19,6 @@ def train(number=None):
     if not number or not str.isnumeric(number):
         print("Not a number: " + str(not number))
         print("Is Numeric: " + str(str.isdigit(str(number))))
-
         return render_template('error-notrainnumber.html', bootstrapcss=bs_css, bootstrapjs=bs_js)
 
     #Getting static or API
@@ -30,16 +29,21 @@ def train(number=None):
                 stops = json.load(samplefile)
             dataisfrom = "Static"
         except:
-
             uuiderr = uuid.uuid4()
             print("Exception: " + str(uuiderr))
             traceback.print_exc()
             return render_template('error.html', uuid=uuiderr, bootstrapcss=bs_css, bootstrapjs=bs_js)
 
     else:
-        timetable_response = requests.get(timetable_api + number)
-        stops = timetable_response.json()
-        dataisfrom = "API"
+        try:
+            timetable_response = requests.get(timetable_api + number)
+            stops = timetable_response.json()
+            dataisfrom = "API"
+        except:
+            uuiderr = uuid.uuid4()
+            print("Exception: " + str(uuiderr))
+            traceback.print_exc()
+            return render_template('error.html', uuid=uuiderr, bootstrapcss=bs_css, bootstrapjs=bs_js)
 
     for stop in stops:
         if stop['stop_type'] and stop['scheduled_arrival_hour']:
