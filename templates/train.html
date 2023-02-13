@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>Simrail Timetable - for simulator use only</h3>
-<div class="container">
+<div class="container" style="border-color: #3c3c3c; border-style: solid; border-width: 2px;">
     <div class="row">
         <div class="col-md-2"><h4>Train Type</h4><p>{{ stops[0].train_type }}</p></div>
         <div class="col-md-2"><h4>Train Number</h4><p>{{ stops[0].train_number }}</p></div>
@@ -18,13 +18,32 @@
         <div class="col-md-2"><h4>Data updated</h4><p>{{ stops[-1].cachedate }}</p></div>
     </div>
 </div>
-<tbody>
-  {% for stop in stops %}
-    <tr>
-      <td>{{stop}}</td>
-      <td>{{stops['{{stop}}']}}</td>
-    </tr>
-  {% endfor %}
-</tbody>
+<div class="container">
+    <div style="border-color: #3c3c3c; border-style: solid; border-width: 2px;">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Line</th>
+                <th scope="col">Station</th>
+                <th scope="col">Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stop in stops %}
+                <tr>
+                    <td>{{ stop.line }}</td>
+                    {% if stop.stop_type %}
+                        <td><b>{{ stop.station }} - {{ stop.stop_type }}</b></td>
+                        <td><b>{{ stop.scheduled_arrival_hour }}<br>{{ stop.departure_time }}</b></td>
+                    {% else %}
+                        <td>{{ stop.station }}</td>
+                        <td>{{ stop.scheduled_arrival_hour }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

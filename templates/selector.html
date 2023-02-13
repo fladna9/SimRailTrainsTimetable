@@ -10,10 +10,15 @@
 <h3>Simrail Timetable - for simulator use only</h3>
 <div class="container">
     <h4>Please submit your train number:</h4>
-    <form method="GET" action="/train/">
-        <input type="number" name="trainnumber">
-        <input type="submit" name="submit">
-    </form>
+    <input type="number" id="trainnumber" name="trainnumber">
+    <input type="submit" name="submit" onClick="redirectToTrain()">
 </div>
+<script>
+    function redirectToTrain() {
+        let trainNumber = document.getElementById("trainnumber").value;
+        console.log(trainNumber);
+        document.location = "/train/" + trainNumber;
+    }
+</script>
 </body>
 </html>
