@@ -2,6 +2,7 @@ from __main__ import app
 from flask import url_for, render_template
 from app import STATIC
 
+
 @app.route('/')
 def selector():
     bs_css = url_for('static', filename='css/bootstrap.min.css')
