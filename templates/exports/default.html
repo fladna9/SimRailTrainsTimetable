@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
+    <script src="{% block script %}{% endblock %}"></script>
+</head>
+<body>
+<div class="container">
+    {% block body %}
+    {% endblock %}
+</div>
+<p style="text-align: center">Simrail Timetable - for simulator use only</p>
+</body>
+</html>

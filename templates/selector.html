@@ -1,13 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{bootstrapcss}}">
-    <script src="{{bootstrapjs}}"></script>
-</head>
-<body>
-<div class="container">
+{% extends "exports/default.html" %}
+{% block title %}Welcome {% endblock %}
+{% block javascript %}{{ bootstrapjs }}{% endblock %}
+{% block stylesheet %}{{ bootstrapcss }}{% endblock %}
+{% block body %}
     <h3>Welcome to Simrail Timetable Viewer</h3>
     <h4>Please submit your train number:</h4>
     <select>
@@ -20,7 +15,6 @@
         <p>This application is licensed under Apache 2.0 license, you can view source code and fork on <a>GitHub</a>.</p>
         <p>Thanks to Simrail developers, DKFN, XXX, Cemo and the SimrailFR community.</p>
     </div>
-</div>
 <script>
     function redirectToTrain() {
         let trainNumber = document.getElementById("trainnumber").value;
@@ -28,6 +22,4 @@
         document.location = "/train/" + trainNumber;
     }
 </script>
-<p style="text-align: center">Simrail Timetable - for simulator use only</p>
-</body>
-</html>
+{% endblock %}
