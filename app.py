@@ -7,7 +7,7 @@ STATIC=False
 app = Flask(__name__)
 
 
-from routes import train, train_selector
+from routes import train, train_selector, train_position
 
 
 def create_app():

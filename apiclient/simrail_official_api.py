@@ -1,6 +1,6 @@
 import requests
-from app import error_catcher
 
+from __main__ import app
 
 BASE_SIMRAIL_API = "https://panel.simrail.eu:8084/"
 BASE_SIMRAIL_DISPATCH_API = "https://panel.simrail.eu:8091/"
@@ -15,7 +15,7 @@ def get_servers_list():
         if response.status_code != 200 or response is None:
             raise Exception("No response from Simrail API")
     except:
-        error_catcher()
+        app.error_catcher()
     return response.json()
 
 
