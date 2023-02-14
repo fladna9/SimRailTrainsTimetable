@@ -1,10 +1,9 @@
 import json
-import datetime
 from __main__ import app
-from apiclient import dkfn_api
-import requests
+from apiclient import dkfn_api, static_api
 from flask import url_for, render_template
-from app import STATIC, error_catcher
+from app import STATIC
+from routes.error_handlers import error_catcher
 
 
 @app.route('/train/')
@@ -19,13 +18,8 @@ def train(number=None):
 
     # Getting static or API
     if STATIC:
-        number = "24181"
-        try:
-            with open('examples/24181.json', 'r') as sample_file:
-                stops = json.load(sample_file)
-            data_is_from = "Static"
-        except:
-            return error_catcher()
+        stops = static_api.get_train(number)
+        data_is_from = "STATIC"
     else:
         stops = dkfn_api.get_train(number)
         data_is_from = "API"

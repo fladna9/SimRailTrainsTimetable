@@ -1,6 +1,6 @@
 import requests
-
 from __main__ import app
+from routes.error_handlers import error_catcher
 
 BASE_SIMRAIL_API = "https://panel.simrail.eu:8084/"
 BASE_SIMRAIL_DISPATCH_API = "https://panel.simrail.eu:8091/"

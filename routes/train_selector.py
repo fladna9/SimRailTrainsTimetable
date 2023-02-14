@@ -1,6 +1,5 @@
 from __main__ import app
 from flask import url_for, render_template
-from app import STATIC
 
 
 @app.route('/')

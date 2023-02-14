@@ -7,7 +7,10 @@ STATIC=False
 app = Flask(__name__)
 
 
-from routes import train, train_selector, train_position
+from routes import train, \
+    train_selector, \
+    train_position, \
+    error_handlers
 
 
 def create_app():
@@ -20,11 +23,3 @@ def create_app():
 if __name__ == '__main__':
     app.run()
 
-
-def error_catcher():
-    uuid_err = uuid.uuid4()
-    print("Exception: " + str(uuid_err))
-    traceback.print_exc()
-    bs_css = url_for('static', filename='css/bootstrap.min.css')
-    bs_js = url_for('static', filename='js/bootstrap.min.js')
-    return render_template('error.html', uuid=uuid_err, bootstrapcss=bs_css, bootstrapjs=bs_js)
